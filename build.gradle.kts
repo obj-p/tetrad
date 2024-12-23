@@ -28,24 +28,32 @@ sourceSets {
 }
 
 tasks.register<JavaExec>("grun") {
-    classpath = sourceSets.main.get().runtimeClasspath
-    description = "grun -gui"
-    group = antlrTasksGroup
-
-    mainClass.set("org.antlr.v4.gui.TestRig")
+    val flag = project.findProperty("grunFlag")?.toString() ?: "-gui"
+    val inputFilenames = project.findProperty("grunInputFilenames")
+        ?.toString()
+        ?.split(" ")
+        .orEmpty()
 
     args = listOf(
         "${tetradPackage}.Tetrad",
         "init",
-        "-gui"
-    )
+        flag
+    ) + inputFilenames
 
-    doFirst {
-        val scanner = Scanner(System.`in`)
-        val input = scanner.nextLine()
+    classpath = sourceSets.main.get().runtimeClasspath
+    description = "grun { -gui | -tokens | -tree } [input-filename(s)]"
+    group = antlrTasksGroup
 
-        standardInput = ByteArrayInputStream(input.encodeToByteArray())
-        scanner.close()
+    mainClass.set("org.antlr.v4.gui.TestRig")
+
+    if (inputFilenames.isEmpty()) {
+        doFirst {
+            val scanner = Scanner(System.`in`)
+            val input = scanner.nextLine()
+
+            standardInput = ByteArrayInputStream(input.encodeToByteArray())
+            scanner.close()
+        }
     }
 }
 
