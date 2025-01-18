@@ -8,6 +8,7 @@ plugins {
 }
 
 val antlrTasksGroup = "ANTLR"
+val antlrGeneratedSrc = "${layout.buildDirectory}/generated-src/antlr/main"
 val tetradPackage = "com.objp.tetrad"
 
 dependencies {
@@ -22,7 +23,7 @@ application {
 sourceSets {
     main {
         java {
-            srcDirs("${layout.buildDirectory}/generated-src/antlr/main")
+            srcDirs(antlrGeneratedSrc)
         }
     }
 }
@@ -57,16 +58,20 @@ tasks.register<JavaExec>("grun") {
     }
 }
 
-tasks.compileKotlin {
-    dependsOn(tasks.generateGrammarSource)
-}
-
 tasks.generateGrammarSource {
+    val tetradOutputDirectory = tetradPackage.replace('.', '/')
+
     maxHeapSize = "64m"
+    outputDirectory = file("$antlrGeneratedSrc/$tetradOutputDirectory")
     arguments = arguments + listOf(
         "-package",
         tetradPackage,
+        "-Xexact-output-dir",
     )
+}
+
+tasks.compileKotlin {
+    dependsOn(tasks.generateGrammarSource)
 }
 
 tasks {
