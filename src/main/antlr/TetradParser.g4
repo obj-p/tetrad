@@ -4,8 +4,14 @@ options {
   tokenVocab = TetradLexer;
 }
 
-init  : '{' value (',' value)* '}' ;
+document
+    : interfaceDefinition+ EOF
+    ;
 
-value : init
-      | INT
-      ;
+interfaceDefinition
+    : INTERFACE name
+    ;
+
+name
+    : NAME
+    ;

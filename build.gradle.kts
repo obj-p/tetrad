@@ -77,7 +77,7 @@ tasks.register<JavaExec>("grun") {
 
     args = listOf(
         "${tetradPackage}.Tetrad",
-        "init",
+        "document",
         flag
     ) + inputFilenames
 

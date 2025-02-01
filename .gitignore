@@ -12,3 +12,7 @@ out
 
 # macOS
 .DS_Store
+
+# :copyTokensForIntelliJAntlrPlugin
+gen
+TetradLexer.tokens
