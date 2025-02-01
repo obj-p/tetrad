@@ -1,4 +1,4 @@
-package com.objp.tetrad
+package org.tetrad
 
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
@@ -18,7 +18,7 @@ class Main {
         walker.walk(ShortToUnicodeString(), tree)
     }
 
-    class ShortToUnicodeString : TetradBaseListener() {
+    class ShortToUnicodeString : TetradParserBaseListener() {
         override fun enterInit(ctx: TetradParser.InitContext) {
             print("\"")
         }
