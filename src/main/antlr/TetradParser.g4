@@ -5,11 +5,35 @@ options {
 }
 
 document
-    : interfaceDefinition+ EOF
+    : interface_declaration+ EOF
     ;
 
-interfaceDefinition
-    : INTERFACE name
+interface_declaration
+    : INTERFACE name interface_body
+    ;
+
+interface_body
+    : LCURLY interface_members RCURLY
+    ;
+
+interface_members
+    : member*
+    ;
+
+member
+    : type_name type_annotation
+    ;
+
+type_name
+    : name
+    ;
+
+type_annotation
+    : COLON type_identifier
+    ;
+
+type_identifier
+    : name QUESTION?
     ;
 
 name

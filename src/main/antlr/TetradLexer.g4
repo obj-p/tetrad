@@ -5,9 +5,11 @@ FUNCTION   : 'fun';
 INTERFACE  : 'interface';
 TYPE       : 'type';
 
-LBRACE : '{';
-RBRACE : '}';
-COMMA  : ',';
+COLON    : ':';
+COMMA    : ',';
+LCURLY   : '{';
+QUESTION : '?';
+RCURLY   : '}';
 
 NAME
     : [_A-Za-z] [_0-9A-Za-z]*

@@ -1,3 +1,4 @@
-interface Foobar
-
-interface Barbaz
+interface Person {
+    firstName: string
+    lastName: string
+}
