@@ -21,7 +21,7 @@ interface_members
     ;
 
 member
-    : type_name type_annotation
+    : type_name QUESTION? type_annotation
     ;
 
 type_name
@@ -33,7 +33,7 @@ type_annotation
     ;
 
 type_identifier
-    : name QUESTION?
+    : name
     ;
 
 name

@@ -1,4 +1,4 @@
 interface Person {
-    firstName: string
+    firstName?: string
     lastName: string
 }
